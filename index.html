@@ -331,6 +331,44 @@
 
         setInterval(updateTimer, 1000);
         updateTimer(); // เรียกทำงานทันที
+
+        function createHeartBurst() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart-burst');
+            // สุ่มสีหัวใจ (แดง, ชมพู, ชมพูเข้ม)
+            const colors = ['#ff0000', '#ff4d4d', '#ff99cc', '#e74c3c'];
+            heart.innerHTML = '❤';
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // สุ่มขนาด
+            const size = Math.random() * 1.5 + 0.8; // ขนาดระหว่าง 0.8 ถึง 2.3 rem
+            heart.style.fontSize = `${size}rem`;
+
+            // สุ่มตำแหน่งเริ่มต้นในแนวนอน (ให้กระจายๆ ตรงกลางล่าง)
+            const startLeft = Math.random() * 40 + 30; // ระหว่าง 30% ถึง 70%
+            heart.style.left = `${startLeft}%`;
+
+            // สุ่มทิศทางการพุ่ง (ใช้ CSS Variable ส่งค่าไปให้ keyframes)
+            // --tx: แกน X (ซ้ายขวา), --ty: แกน Y (ขึ้นบน), --r: การหมุน
+            const tx = (Math.random() - 0.5) * 200; // พุ่งไปซ้ายขวาได้ถึง 100px
+            const ty = -(Math.random() * 300 + 200); // พุ่งขึ้นบน 200px ถึง 500px
+            const r = (Math.random() - 0.5) * 360; // หมุนมั่วๆ
+            
+            heart.style.setProperty('--tx', `${tx}px`);
+            heart.style.setProperty('--ty', `${ty}px`);
+            heart.style.setProperty('--r', `${r}deg`);
+
+            container.appendChild(heart);
+
+            // ลบ element ทิ้งเมื่อเล่นอนิเมชั่นจบ (เพื่อไม่ให้เครื่องหน่วง)
+            setTimeout(() => {
+                heart.remove();
+            }, 4000); // ตรงกับเวลา animation 4s
+        }
+
+        // สั่งให้สร้างหัวใจพุ่งออกมาเรื่อยๆ ทุกๆ 0.3 วินาที (ปรับให้เร็ว/ช้าได้)
+        setInterval(createHeartBurst, 300);
     </script>
 </body>
 </html>
