@@ -20,6 +20,31 @@
             overflow: hidden; /* ซ่อน Scrollbar ของ Browser */
         }
 
+
+        /* ปุ่มเพลง */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    animation: spin 4s linear infinite;
+    animation-play-state: paused;
+}
+
+.music-btn.playing {
+    animation-play-state: running;
+    background: rgba(255, 200, 200, 0.9);
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
         /* คอนเทนเนอร์หลักสำหรับ Scroll Snap */
         .container {
             height: 100vh;
@@ -212,11 +237,15 @@
 </head>
 <body>
 
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔇</button>
+    <audio id="bgMusic" src="song.mp3" loop></audio>
+
     <div class="container">
         
         <section>
             <div class="bg-heart" style="left: 10%; animation-duration: 8s;">❤</div>
             <div class="bg-heart" style="left: 70%; animation-duration: 12s; font-size: 3rem;">❤</div>
+            
 
             <h1>Happy Valentine's Day</h1>
             <div class="photo-frame">
@@ -369,6 +398,21 @@
 
         // สั่งให้สร้างหัวใจพุ่งออกมาเรื่อยๆ ทุกๆ 0.3 วินาที (ปรับให้เร็ว/ช้าได้)
         setInterval(createHeartBurst, 300);
+
+        function toggleMusic() {
+    const music = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+    
+    if (music.paused) {
+        music.play();
+        btn.innerHTML = '🎵'; 
+        btn.classList.add('playing'); 
+    } else {
+        music.pause();
+        btn.innerHTML = '🔇'; 
+        btn.classList.remove('playing'); 
+    }
+}
     </script>
 </body>
 </html>
