@@ -81,7 +81,7 @@
         /* ตัวนับเวลา (Timer) */
         #timer {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* เปลี่ยนเป็น 3 คอลัมน์ */
             gap: 10px;
             margin-top: 20px;
             width: 90%;
@@ -220,7 +220,7 @@
                  <img src="img5.jpg" alt="Thank You Photo">
             </div>
             
-            <p>
+            <p style="background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 15px; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);"></p>>
                 "สุดท้ายนี้ก็ขอบคุณที่รักกันมาตลอดนะ<br>
                 ขอบคุณที่อดทนกับนิสัยแย่ๆของฉันมาตลอด ไม่เคยทิ้งกันไปไหน<br>
                 และขอบคุณที่รักกันมาตลอดและสัญญาว่าจะรักกันแบบนี้ไปนานๆนะ<br>
@@ -253,6 +253,7 @@
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
 
+            document.getElementById("years").innerText = years;
             document.getElementById("days").innerText = days;
             document.getElementById("hours").innerText = hours;
             document.getElementById("minutes").innerText = minutes;
